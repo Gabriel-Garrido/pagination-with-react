@@ -24,7 +24,7 @@ function PaginationComponent() {
 
 	useEffect(() => {
 		let items =[]
-		for(let i=1; i<infoPage.pages;i++) {
+		for(let i=1; i<7;i++) {
 			items.push(<li class="page-item" key={i}><a class="page-link" onClick={(e) => {GetList(parseInt(e.target.text), null)}} href="#">{i}</a></li>)
 		}
 		setItemPagination(items)
@@ -37,7 +37,46 @@ function PaginationComponent() {
 					<div class="card-header fs-1">
 						Pagination API rick and morty
 					</div>
-					<div class="card-body">
+					<div class="card-body ">
+
+					<div className="container d-flex justify-content-center">
+					<nav aria-label="Page navigation example ">
+							<ul class="pagination">
+								<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous"
+								onClick={() => {
+									if (infoPage.prev === null) {
+										GetList(0, null)
+									}else {
+										GetList (null, infoPage.prev)
+									}
+								}}
+								>
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+								</li>
+								
+								{itemPagination.map((item) => {
+
+									return item
+								})}
+
+								<li class="page-item">
+									<a class="page-link" href="#" aria-label="Next"
+									onClick={() => {
+										if (infoPage.next === null) {
+											GetList(0, null)
+										}else {
+											GetList (null, infoPage.next)
+										}
+									}}
+									>
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
+						</div>
 						
 						<table className="table mt-4">
 							<thead>
@@ -83,6 +122,7 @@ function PaginationComponent() {
 								</li>
 								
 								{itemPagination.map((item) => {
+
 									return item
 								})}
 
